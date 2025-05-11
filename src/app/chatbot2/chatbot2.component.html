@@ -1,78 +1,15 @@
 <div *ngIf="isChatOpen" class="chat-container">
   <!-- 🔝 Always Visible Header -->
-  <div class="chat-header">
+  <div class="chat-header" *ngIf="showChat">
     <span>Chat with Second Assistant</span>
     <button (click)="closeChat()">×</button>
   </div>
-  <!-- 👤 Login Form if Not Authenticated -->
-  <div *ngIf="!isAuthenticated" class="chat-login-form p-3">
-    <form #loginForm="ngForm" (ngSubmit)="startChat()" novalidate>
-      <p class="text-muted text-center small mb-3">
-        We look forward to chatting with you. Please provide us with the
-        following information.
-      </p>
-      <input
-        type="text"
-        name="firstName"
-        [(ngModel)]="username"
-        placeholder="First name *"
-        class="form-control mb-2"
-        required
-      />
-
-      <input
-        type="text"
-        name="lastName"
-        [(ngModel)]="lastName"
-        placeholder="Last name *"
-        class="form-control mb-2"
-        required
-      />
-
-      <input
-        type="email"
-        name="email"
-        [(ngModel)]="email"
-        placeholder="E-mail address *"
-        class="form-control mb-2"
-        required
-        email
-        #emailInput="ngModel"
-      />
-      <div
-        *ngIf="emailInput.invalid && emailInput.touched"
-        class="text-danger small mb-2"
-      >
-        Please enter a valid email address.
-      </div>
-
-      <div class="form-check mb-3">
-        <input
-          type="checkbox"
-          class="form-check-input"
-          name="agree"
-          [(ngModel)]="agreedToPolicy"
-          required
-          id="privacyCheck"
-        />
-        <label for="privacyCheck" class="form-check-label small">
-          I agree to the processing of my personal data. I have read the
-          <a href="#" target="_blank">privacy policy</a>.
-        </label>
-      </div>
-
-      <button
-        type="submit"
-        class="btn btn-dark w-100"
-        [disabled]="loginForm.invalid"
-      >
-        Start chat
-      </button>
-    </form>
-  </div>
 
   <!-- 💬 Chat Interface -->
-  <div *ngIf="isAuthenticated" class="chat-body" #chatBody>
+  <div *ngIf="showChat" class="chat-body" #chatBody>
+    <div *ngIf="chatStartTime" class="chat-start-time">
+      {{ chatStartTime }}
+    </div>
     <div *ngFor="let message of messages">
       <div
         class="message-wrapper"
@@ -127,7 +64,7 @@
   </div>
 
   <!-- ✏️ Chat Footer -->
-  <div *ngIf="isAuthenticated" class="chat-footer">
+  <div *ngIf="showChat" class="chat-footer">
     <input
       type="text"
       [(ngModel)]="userMessage"
@@ -143,4 +80,33 @@
       </svg>
     </button>
   </div>
+  <!-- Feedback Section -->
+  <div *ngIf="showFeedbackForm" class="feedback-wrapper">
+    <div class="feedback-card">
+      <h4>How was Your experience with chatbot today?</h4>
+      <div class="stars">
+        <i
+          class="fas fa-star"
+          *ngFor="let star of [1, 2, 3, 4, 5]"
+          [ngClass]="{ selected: selectedRating >= star }"
+          (click)="selectedRating = star"
+        ></i>
+      </div>
+      <div class="labels">
+        <span>Bad</span>
+        <span>Outstanding!</span>
+      </div>
+      <button
+        class="submit-btn"
+        [disabled]="!selectedRating"
+        (click)="submitFeedback()"
+      >
+        Submit
+      </button>
+    </div>
+  </div>
+  <app-feedback2
+    *ngIf="showbotFeedbackForm"
+    (feedbackComplete)="onFeedbackComplete()"
+  ></app-feedback2>
 </div>
