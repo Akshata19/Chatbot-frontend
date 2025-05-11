@@ -2,6 +2,7 @@
   <app-navbar (helpClicked5)="openChat(5)"></app-navbar>
   <app-chatbot5
     *ngIf="chatVisible5"
+    [hidden]="isMinimized"
     [chatbotEndpoint]="chatbotEndpont"
     (close)="closeChat5()"
     (minimize)="handleMinimize()"
@@ -9,11 +10,10 @@
   ></app-chatbot5>
   <router-outlet></router-outlet>
 
-  <!-- Floating Chatbot Icon -->
   <div
     class="chatbot-launcher"
-    (click)="toggleChatOptions()"
-    *ngIf="!isAnyChatbotOpen()"
+    (click)="isMinimized ? restoreChat() : toggleChatOptions()"
+    *ngIf="!isAnyChatbotOpen() || isMinimized"
   >
     <i class="fas fa-comments"></i>
   </div>
