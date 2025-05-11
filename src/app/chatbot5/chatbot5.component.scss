@@ -604,3 +604,9 @@
   width: fit-content;
   max-width: 80%;
 }
+app-feedback-form {
+  overflow-y: auto;
+  max-height: 500px;
+  padding: 10px;
+  display: block;
+}

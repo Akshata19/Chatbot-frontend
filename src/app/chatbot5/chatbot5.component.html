@@ -1,5 +1,5 @@
 <div *ngIf="isChatOpen" class="chat-container">
-  <div class="chat-header">
+  <div class="chat-header" *ngIf="showChat">
     <!-- Left menu -->
     <div class="header-menu-wrapper">
       <button class="burger-button" (click)="openMenu()">
@@ -57,7 +57,7 @@
     </div>
   </div>
 
-  <div class="chat-body" #chatBody>
+  <div class="chat-body" #chatBody *ngIf="showChat">
     <!-- Chat start time (not inside a bubble) -->
     <div *ngIf="chatStartTime" class="chat-start-time">
       Chat started at {{ chatStartTime }}
@@ -120,7 +120,7 @@
     </button>
   </div>
 
-  <div class="chat-footer">
+  <div class="chat-footer" *ngIf="showChat">
     <!-- <button class="burger-button" (click)="openMenu()">
       <svg width="24" height="24" viewBox="0 0 24 24">
         <path
@@ -162,4 +162,8 @@
       </button>
     </div>
   </div>
+  <app-feedback5
+    *ngIf="showFeedbackForm"
+    (feedbackComplete)="onFeedbackComplete()"
+  ></app-feedback5>
 </div>
