@@ -13,16 +13,7 @@ import { environment } from '../environment/environment';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterOutlet,
-    NavbarComponent,
-    ChattbotComponent,
-    Chatbot2Component,
-    Chatbot3Component,
-    Chatbot4Component,
-    Chatbot5Component,
-  ],
+  imports: [CommonModule, RouterOutlet, NavbarComponent, Chatbot4Component],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
@@ -144,7 +135,12 @@ export class AppComponent {
   }
 
   handleMinimize(): void {
-    this.closeAllChats();
+    // this.closeAllChats();
+    //this.closeAllChats();
     this.isMinimized = true;
+  }
+
+  restoreChat(): void {
+    this.isMinimized = false;
   }
 }

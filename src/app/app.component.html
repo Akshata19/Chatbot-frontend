@@ -2,6 +2,7 @@
   <app-navbar (helpClicked4)="openChat(4)"></app-navbar>
   <app-chatbot4
     *ngIf="chatVisible4"
+    [hidden]="isMinimized"
     [chatbotEndpoint]="chatbotEndpont"
     [username]="this.username"
     (close)="closeChat4()"
@@ -14,8 +15,8 @@
   <!-- Floating Chatbot Icon -->
   <div
     class="chatbot-launcher"
-    (click)="toggleChatOptions()"
-    *ngIf="!isAnyChatbotOpen()"
+    (click)="isMinimized ? restoreChat() : toggleChatOptions()"
+    *ngIf="!isAnyChatbotOpen() || isMinimized"
   >
     <i class="fas fa-comments"></i>
   </div>

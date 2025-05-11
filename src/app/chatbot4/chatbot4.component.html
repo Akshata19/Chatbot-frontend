@@ -1,5 +1,5 @@
 <div *ngIf="isChatOpen && !isMinimized" class="chat-container">
-  <div class="chat-header">
+  <div class="chat-header" *ngIf="showChat">
     <img
       src="assets/images/avatar.png"
       alt="Assistant Avatar"
@@ -29,7 +29,7 @@
         </ul>
       </div>
     </div>
-    <button class="minimize-button" (click)="minimizeChat()">
+    <button class="minimize-button" (click)="minimize.emit()">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 512 512"
@@ -42,7 +42,7 @@
     </button>
   </div>
 
-  <div class="chat-body" #chatBody>
+  <div class="chat-body" #chatBody *ngIf="showChat">
     <div *ngFor="let message of messages">
       <div
         class="message-wrapper"
@@ -109,7 +109,7 @@
     <div *ngIf="isTyping" class="processing-text">Processing...</div>
   </div>
 
-  <div class="chat-footer">
+  <div class="chat-footer" *ngIf="showChat">
     <label class="attach-button">
       <input type="file" hidden (change)="handleFileUpload($event)" />
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -168,7 +168,9 @@
       <button (click)="submitFeedback()">Submit</button>
     </div>
   </div>
-</div>
-<div *ngIf="isMinimized" class="chat-minimized" (click)="isMinimized = false">
-  <img src="assets/images/chat.png" alt="Chatbot Icon" />
+
+  <app-feedback4
+    *ngIf="showFeedbackForm"
+    (feedbackComplete)="onFeedbackComplete()"
+  ></app-feedback4>
 </div>
