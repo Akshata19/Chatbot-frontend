@@ -2,10 +2,12 @@
   <app-navbar (helpClicked3)="openChat(3)"></app-navbar>
   <app-chatbot3
     *ngIf="chatVisible3"
+    [hidden]="isMinimized"
     [chatbotEndpoint]="chatbotEndpont"
     [username]="this.username"
     (close)="closeChat3()"
     [userId]="user?._id"
+    (minimize)="handleMinimize()"
   ></app-chatbot3>
 
   <router-outlet></router-outlet>
@@ -13,8 +15,8 @@
   <!-- Floating Chatbot Icon -->
   <div
     class="chatbot-launcher"
-    (click)="toggleChatOptions()"
-    *ngIf="!isAnyChatbotOpen()"
+    (click)="isMinimized ? restoreChat() : toggleChatOptions()"
+    *ngIf="!isAnyChatbotOpen() || isMinimized"
   >
     <i class="fas fa-comments"></i>
   </div>
