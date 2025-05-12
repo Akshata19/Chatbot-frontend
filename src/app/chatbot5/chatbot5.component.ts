@@ -37,7 +37,10 @@ export class Chatbot5Component {
   showClose: boolean = false;
   showFeedbackForm = false;
   showChat = false;
-
+  initialButtons: { title: string; payload: string }[] = [
+    { title: 'A delivery, return or refund', payload: '/ask_help' },
+    { title: 'Something else', payload: '/something_else' },
+  ];
   messages: {
     text?: string;
     sender: string;
@@ -81,7 +84,9 @@ export class Chatbot5Component {
     this.messages.push({
       sender: 'Bot',
       isButtonGroup: true,
+      buttons: this.initialButtons,
     });
+    this.latestButtons = this.initialButtons;
   }
 
   sendBotMessage(message: string): void {

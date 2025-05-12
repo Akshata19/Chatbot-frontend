@@ -581,8 +581,9 @@
     }
   }
 }
+
 .minimize-button {
-  margin-left: auto; /* Push to right */
+  margin-left: auto;
   margin-right: 4px;
   background: transparent;
   border: none;
@@ -593,6 +594,7 @@
     fill: #333;
   }
 }
+
 .system-message {
   text-align: center;
   font-size: 13px;
