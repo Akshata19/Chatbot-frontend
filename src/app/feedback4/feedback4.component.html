@@ -31,28 +31,18 @@
 
   <form *ngIf="!submitted" [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
     <fieldset>
-      <legend><i class="fas fa-user"></i> User Details</legend>
+      <legend><i class="fas fa-user"></i> User Identifier</legend>
       <div class="form-group">
-        <label for="name">Name:</label>
-        <input id="name" type="text" formControlName="name" />
-      </div>
-      <div class="form-group">
-        <label for="age">Age:</label>
-        <input id="age" type="number" formControlName="age" />
-      </div>
-      <div class="form-group">
-        <label for="gender">Gender:</label>
-        <select id="gender" formControlName="gender">
-          <option value="">Select</option>
-          <option>Female</option>
-          <option>Male</option>
-          <option>Other</option>
-          <option>Prefer not to say</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="occupation">Occupation:</label>
-        <input id="occupation" type="text" formControlName="occupation" />
+        <label for="name">
+          Please enter a unique identifier (e.g., first two letters of your
+          first name and your date of birth):
+        </label>
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          placeholder="e.g., Sa1203"
+        />
       </div>
     </fieldset>
 
@@ -62,12 +52,9 @@
 
     <div class="rating-group">
       <label>
-        How effective was the chat message layout in helping you distinguish
-        between user and bot messages? (Pattern: Chat Message)
+        How much did you like the chat message design?
         <br />
-        <small
-          >1 = Confusing or unclear, 5 = Very effective and easy to
-          distinguish</small
+        <small>1 = Didn't like at all, 5 = Liked very much</small>
         >
       </label>
       <div class="stars">
@@ -86,9 +73,8 @@
 
     <div class="rating-group">
       <label>
-        Were the box-shaped quick reply buttons aligned on right side easy to
-        find and convinient to use? (Pattern: Quick Reply) <br />
-        <small>1 = Hard to locate or use, 5 = Very easy and intuitive</small>
+        How much did you like the box-shaped right aligned quick reply buttons?
+        <small>1 = Didn't like at all, 5 = Liked very much</small>
       </label>
       <div class="stars">
         <ng-container *ngFor="let rating of [5, 4, 3, 2, 1]">
@@ -106,13 +92,9 @@
 
     <div class="rating-group">
       <label>
-        Did the typing indicator including text below and animation waseffective
-        to signal that the bot was responding? (Pattern: Typing Indicator)
-        <br />
-        <small
-          >1 = Did not notice or felt awkward, 5 = Clear and helpful
-          feedback</small
-        >
+        How much did you like the typing indicator which displayed when bot was
+        generating response? <br />
+        <small>1 = Didn't like at all, 5 = Liked very much</small>
       </label>
       <div class="stars">
         <ng-container *ngFor="let rating of [5, 4, 3, 2, 1]">
@@ -130,12 +112,9 @@
 
     <div class="rating-group">
       <label>
-        Was the close action easily findable and was the conversation closure
-        process easy to understand? (Pattern: Conversation Closure) <br />
-        <small
-          >1 = Hard to find or confusing, 5 = Very clear and easy to
-          complete</small
-        >
+        How much did you like the close chat and conversation ending process?
+        <br />
+        <small>1 = Didn't like at all, 5 = Liked very much</small>
       </label>
       <div class="stars">
         <ng-container *ngFor="let rating of [5, 4, 3, 2, 1]">
@@ -153,12 +132,8 @@
 
     <div class="rating-group">
       <label>
-        How visible and intuitive was the persistent menu (Type 2 – three dots
-        on the top-right)? (Pattern: Persistent Menu) <br />
-        <small
-          >1 = Not visible or hard to use, 5 = Clearly visible and
-          accessible</small
-        >
+        How much did you like the persistent menu?
+        <small>1 = Didn't like at all, 5 = Liked very much</small>
       </label>
       <div class="stars">
         <ng-container *ngFor="let rating of [5, 4, 3, 2, 1]">
@@ -176,13 +151,10 @@
 
     <div class="rating-group">
       <label>
-        Did the display of chatbot name after each chatbot message and timestamp
-        after each user and bot message help clarify the context of the
-        conversation? (Pattern: Information Stamp) <br />
-        <small
-          >1 = Did not add context, 5 = Very useful for conversation
-          clarity</small
-        >
+        How much did you like the information stamp such as time and chatbot
+        name after each bot message?
+        <br />
+        <small>1 = Didn't like at all, 5 = Liked very much</small>
       </label>
       <div class="stars">
         <ng-container *ngFor="let rating of [5, 4, 3, 2, 1]">

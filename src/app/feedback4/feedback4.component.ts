@@ -27,10 +27,6 @@ export class Feedback4Component {
   constructor(private fb: FormBuilder, private http: HttpClient) {
     this.feedbackForm = this.fb.group({
       name: ['', Validators.required],
-      age: [null, Validators.required],
-      gender: ['', Validators.required],
-      occupation: [''],
-
       chatbotVersion: [this.chatbotVersion],
       chatMessage: [null, Validators.required],
       quickReply: [null, Validators.required],
@@ -44,14 +40,6 @@ export class Feedback4Component {
   }
 
   onSubmit() {
-    if (!this.feedbackForm.contains('persistentMenu'))
-      this.feedbackForm.addControl('persistentMenu', this.fb.control(null));
-    if (!this.feedbackForm.contains('sessionMinimization'))
-      this.feedbackForm.addControl(
-        'sessionMinimization',
-        this.fb.control(null)
-      );
-
     if (this.feedbackForm.invalid) {
       this.feedbackForm.markAllAsTouched();
 
