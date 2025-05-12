@@ -22,10 +22,10 @@ export class Chatbot2Component {
   @Output() close = new EventEmitter<void>();
   @Input() chatbotEndpoint: string = environment.rasaEndpoint;
   @Input() userId: string = '';
+  @Input() username: string = 'User';
   userMessage = '';
   isTyping = false;
   isChatOpen = true;
-  username: string = '';
   email: string = '';
   isAuthenticated: boolean = false;
   lastName: string = '';
@@ -36,6 +36,13 @@ export class Chatbot2Component {
   @Output() minimize = new EventEmitter<void>();
   chatStartTime: string = '';
   showbotFeedbackForm = false;
+  showMenu: boolean = false;
+  showConfirmationDialog = false;
+  initialButtons: { title: string; payload: string }[] = [
+    { title: 'A delivery, return or refund', payload: '/ask_help' },
+    { title: 'Something else', payload: '/something_else' },
+  ];
+  isMinimized: boolean = false;
   messages: {
     text?: string;
     sender: string;
@@ -243,8 +250,7 @@ export class Chatbot2Component {
   }
 
   closeChat(): void {
-    this.showChat = false;
-    this.showFeedbackForm = true;
+    this.close.emit();
     // this.close.emit();
   }
 
@@ -257,5 +263,50 @@ export class Chatbot2Component {
   onFeedbackComplete(): void {
     this.isChatOpen = false;
     this.close.emit();
+  }
+
+  openMenu(): void {
+    this.showMenu = !this.showMenu;
+    console.log('Persistent menu button clicked.');
+  }
+
+  endChat(): void {
+    this.closeChat();
+  }
+
+  confirmEndChat(): void {
+    this.showMenu = !this.showMenu;
+    this.showConfirmationDialog = true;
+  }
+  confirmEndChat1(): void {
+    //this.showMenu = !this.showMenu;
+    this.showConfirmationDialog = true;
+  }
+  endChatConfirmed(): void {
+    this.showConfirmationDialog = false;
+    this.showChat = false;
+    this.showbotFeedbackForm = true;
+  }
+
+  cancelEndChat(): void {
+    this.showConfirmationDialog = false;
+  }
+
+  menuOptions(): void {
+    this.showMenu = false;
+    this.messages.push({
+      sender: 'Bot',
+      isButtonGroup: true,
+      buttons: this.initialButtons,
+    });
+  }
+
+  minimizeChat(): void {
+    this.minimize.emit();
+    this.isMinimized = true;
+  }
+
+  restoreChat(): void {
+    this.isMinimized = false;
   }
 }

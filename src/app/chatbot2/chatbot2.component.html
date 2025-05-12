@@ -2,7 +2,19 @@
   <!-- 🔝 Always Visible Header -->
   <div class="chat-header" *ngIf="showChat">
     <span>Chat with Second Assistant</span>
-    <button (click)="closeChat()">×</button>
+    <button class="minimize-button" (click)="minimizeChat()">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <rect x="4" y="11" width="16" height="2" fill="white" />
+      </svg>
+    </button>
+    <button class="close-button" (click)="confirmEndChat1()">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+        <path
+          fill="white"
+          d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
+        />
+      </svg>
+    </button>
   </div>
 
   <!-- 💬 Chat Interface -->
@@ -19,20 +31,27 @@
         }"
       >
         <!-- Bot Messages -->
-        <div
-          *ngIf="message.sender === 'Bot' && message.text"
-          class="message-container"
-        >
-          <div class="avatar">
-            <span class="avatar-letter">T</span>
-          </div>
-          <div class="bot-message">
-            <div class="message-text">
-              {{ message.text }}
+        <div class="">
+          <div
+            *ngIf="message.sender === 'Bot' && message.text"
+            class="message-container"
+          >
+            <div class="avatar">
+              <span class="avatar-letter">T</span>
+            </div>
+            <div class="bot-message">
+              <div class="message-text">
+                {{ message.text }}
+              </div>
             </div>
           </div>
+          <div
+            *ngIf="message.sender === 'Bot' && !message.isButtonGroup"
+            class="bot-label"
+          >
+            Shopsphere Assistant
+          </div>
         </div>
-
         <!-- Quick Reply Buttons -->
         <div *ngIf="message.isButtonGroup" class="rich-menu">
           <ul class="rich-menu-items">
@@ -58,13 +77,22 @@
     </div>
 
     <!-- Typing Indicator -->
-    <div *ngIf="isTyping" class="typing-indicator">
-      <span>Bot is typing...</span>
+    <div class="message-wrapper align-left" *ngIf="isTyping">
+      <div class="message-container bot-message">
+        <div class="typing-indicator">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- ✏️ Chat Footer -->
   <div *ngIf="showChat" class="chat-footer">
+    <button class="burger-button" (click)="openMenu()">
+      <svg width="25" height="25" viewBox="0 0 24 24">
+        <path fill="#333" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z" />
+      </svg>
+    </button>
     <input
       type="text"
       [(ngModel)]="userMessage"
@@ -80,7 +108,14 @@
       </svg>
     </button>
   </div>
-  <!-- Feedback Section -->
+
+  <div class="persistent-menu" *ngIf="showMenu">
+    <ul>
+      <li (click)="confirmEndChat()">End Chat</li>
+      <li (click)="menuOptions()">Menu Options</li>
+    </ul>
+  </div>
+  <!-- Feedback Section 
   <div *ngIf="showFeedbackForm" class="feedback-wrapper">
     <div class="feedback-card">
       <h4>How was Your experience with chatbot today?</h4>
@@ -104,7 +139,24 @@
         Submit
       </button>
     </div>
+  </div>-->
+
+  <!-- 🔒 End Chat Confirmation Dialog -->
+  <div *ngIf="showConfirmationDialog" class="confirmation-dialog">
+    <div class="confirmation-content">
+      <div class="confirmation-text">
+        <h4>End chat</h4>
+        <p>Are you sure ou want to end the chat?</p>
+      </div>
+      <div class="confirmation-buttons">
+        <button class="confirm-btn" (click)="endChatConfirmed()">
+          Confirmation End chat
+        </button>
+        <button class="cancel-btn" (click)="cancelEndChat()">Go Back</button>
+      </div>
+    </div>
   </div>
+
   <app-feedback2
     *ngIf="showbotFeedbackForm"
     (feedbackComplete)="onFeedbackComplete()"

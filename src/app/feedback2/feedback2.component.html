@@ -31,28 +31,18 @@
 
   <form *ngIf="!submitted" [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
     <fieldset>
-      <legend><i class="fas fa-user"></i> User Details</legend>
+      <legend><i class="fas fa-user"></i> User Identifier</legend>
       <div class="form-group">
-        <label for="name">Name:</label>
-        <input id="name" type="text" formControlName="name" />
-      </div>
-      <div class="form-group">
-        <label for="age">Age:</label>
-        <input id="age" type="number" formControlName="age" />
-      </div>
-      <div class="form-group">
-        <label for="gender">Gender:</label>
-        <select id="gender" formControlName="gender">
-          <option value="">Select</option>
-          <option>Female</option>
-          <option>Male</option>
-          <option>Other</option>
-          <option>Prefer not to say</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="occupation">Occupation:</label>
-        <input id="occupation" type="text" formControlName="occupation" />
+        <label for="name">
+          Please enter a unique identifier (e.g., first two letters of your
+          first name and your date of birth):
+        </label>
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          placeholder="e.g., Sa1203"
+        />
       </div>
     </fieldset>
 
@@ -62,17 +52,13 @@
 
     <div class="rating-group">
       <label>
-        How effective was the chat message layout—with a non-rounded
-        bottom-right corner—in helping you distinguish between user and bot
-        messages? (Pattern: Chat Message)
+        How much did you like the chat message design?
         <br />
-        <small
-          >1 = Confusing or unclear, 5 = Very effective and easy to
-          distinguish</small
+        <small>1 = Didn't like at all, 5 = Liked very much</small>
         >
       </label>
       <div class="stars">
-        <ng-container *ngFor="let rating of [1, 2, 3, 4, 5]">
+        <ng-container *ngFor="let rating of [5, 4, 3, 2, 1]">
           <input
             type="radio"
             id="chatMessage-{{ rating }}"
@@ -87,12 +73,8 @@
 
     <div class="rating-group">
       <label>
-        How would you rate the design of the list-style quick reply buttons?
-        (Interaction Pattern: Quick Reply) <br />
-        <small
-          >1 = Poor visual design and layout, 5 = Visually clear and
-          well-designed</small
-        >
+        How much did you like the list-style quick reply buttons?
+        <small>1 = Didn't like at all, 5 = Liked very much</small>
       </label>
       <div class="stars">
         <ng-container *ngFor="let rating of [5, 4, 3, 2, 1]">
@@ -110,13 +92,9 @@
 
     <div class="rating-group">
       <label>
-        Did the typing indicator with text "bot is typing..." effective to
-        signal that the bot was responding? (Pattern: Typing Indicator)
-        <br />
-        <small
-          >1 = Did not notice or felt awkward, 5 = Clear and helpful
-          feedback</small
-        >
+        How much did you like the typing indicator which displayed when bot was
+        generating response? <br />
+        <small>1 = Didn't like at all, 5 = Liked very much</small>
       </label>
       <div class="stars">
         <ng-container *ngFor="let rating of [5, 4, 3, 2, 1]">
@@ -134,13 +112,9 @@
 
     <div class="rating-group">
       <label>
-        Was the close action easily findable and was the conversation closure
-        process easy to understand and helpful? (Pattern: Conversation Closure)
+        How much did you like the close chat and conversation ending process?
         <br />
-        <small
-          >1 = Hard to find or confusing, 5 = Very clear and easy to
-          complete</small
-        >
+        <small>1 = Didn't like at all, 5 = Liked very much</small>
       </label>
       <div class="stars">
         <ng-container *ngFor="let rating of [5, 4, 3, 2, 1]">
@@ -158,14 +132,9 @@
 
     <div class="rating-group">
       <label>
-        Did the display of timestamp in the beginning of conversation (date at
-        time) help clarify the context of the conversation? (Pattern:
-        Information Stamp)
-        <br />
-        <small
-          >1 = Did not add context, 5 = Very useful for conversation
-          clarity</small
-        >
+        How much did you like the timestamp at the beginning of the conversation
+        and chatbot name after each chatbot message? <br />
+        <small>1 = Didn't like at all, 5 = Liked very much</small>
       </label>
       <div class="stars">
         <ng-container *ngFor="let rating of [5, 4, 3, 2, 1]">
@@ -180,8 +149,28 @@
         </ng-container>
       </div>
     </div>
+
+    <div class="rating-group">
+      <label>
+        How much did you like the session minimization icon? <br />
+        <small>1 = Didn't like at all, 5 = Liked very much</small>
+      </label>
+      <div class="stars">
+        <ng-container *ngFor="let rating of [5, 4, 3, 2, 1]">
+          <input
+            type="radio"
+            id="sessionMinimization-{{ rating }}"
+            name="sessionMinimization"
+            formControlName="sessionMinimization"
+            [value]="rating"
+          />
+          <label for="sessionMinimization-{{ rating }}">&#9733;</label>
+        </ng-container>
+      </div>
+    </div>
     <label
-      ><i class="fas fa-comment"></i> Comments / Suggestions:
+      ><i class="fas fa-comment"></i> Would you like to suggest or tell anything
+      about the chat bot user interface:
       <textarea formControlName="comments"></textarea>
     </label>
 

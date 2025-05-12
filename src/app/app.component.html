@@ -6,14 +6,17 @@
     [chatbotEndpoint]="chatbotEndpont"
     (close)="closeChat1()"
     [userId]="user?._id"
+    [hidden]="isMinimized"
+    [username]="this.username"
+    (minimize)="handleMinimize()"
   ></app-chatbot2>
   <router-outlet></router-outlet>
 
   <!-- Floating Chatbot Icon -->
   <div
     class="chatbot-launcher"
-    (click)="toggleChatOptions()"
-    *ngIf="!isAnyChatbotOpen()"
+    (click)="isMinimized ? restoreChat() : toggleChatOptions()"
+    *ngIf="!isAnyChatbotOpen() || isMinimized"
   >
     <i class="fas fa-comments"></i>
   </div>
