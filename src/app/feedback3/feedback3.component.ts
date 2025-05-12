@@ -27,17 +27,13 @@ export class Feedback3Component {
   constructor(private fb: FormBuilder, private http: HttpClient) {
     this.feedbackForm = this.fb.group({
       name: ['', Validators.required],
-      age: [null, Validators.required],
-      gender: ['', Validators.required],
-      occupation: [''],
-
       chatbotVersion: [this.chatbotVersion],
       chatMessage: [null, Validators.required],
       quickReply: [null, Validators.required],
       typingIndicator: [null, Validators.required],
       persistentMenu: [null],
       informationStamp: [null],
-      sessionMinimization: [null, Validators.required],
+      sessionMinimization: [null],
       conversationClosure: [null, Validators.required],
       comments: [''],
     });

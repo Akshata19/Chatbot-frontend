@@ -39,12 +39,13 @@ export class Chatbot3Component {
   showMenu: boolean = false;
   isMinimized: boolean = false;
   showConfirmationDialog = false; // Controls whether the "Are you sure?" dialog is displayed
-  showFeedbackForm = false;
+  showbotFeedbackForm = false;
   initialButtons: { title: string; payload: string }[] = [
     { title: 'A delivery, return or refund', payload: '/ask_help' },
     { title: 'Something else', payload: '/something_else' },
   ];
-
+  showFeedbackForm = false;
+  selectedRating: number = 0;
   messages: ChatMessage[] = [];
   showChat = false;
   @ViewChild('chatBody') private chatBody!: ElementRef;
@@ -293,7 +294,8 @@ export class Chatbot3Component {
   }
   confirmEndChat1(): void {
     //this.showMenu = !this.showMenu;
-    this.showConfirmationDialog = true;
+    this.showFeedbackForm = true;
+    this.showChat = false;
   }
   endChatConfirmed(): void {
     this.showConfirmationDialog = false;
@@ -327,5 +329,11 @@ export class Chatbot3Component {
   onFeedbackComplete(): void {
     this.isChatOpen = false;
     this.close.emit();
+  }
+
+  submitFeedback(): void {
+    this.showFeedbackForm = false;
+    this.showbotFeedbackForm = true;
+    //  this.close.emit();
   }
 }
