@@ -8,6 +8,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-feedback-form',
@@ -26,9 +27,6 @@ export class FeedbackFormComponent {
   constructor(private fb: FormBuilder, private http: HttpClient) {
     this.feedbackForm = this.fb.group({
       name: ['', Validators.required],
-      age: [null, Validators.required],
-      gender: ['', Validators.required],
-      occupation: [''],
 
       chatbotVersion: [this.chatbotVersion],
       chatMessage: [null, Validators.required],
@@ -43,13 +41,19 @@ export class FeedbackFormComponent {
   }
 
   onSubmit() {
-    if (!this.feedbackForm.contains('persistentMenu'))
-      this.feedbackForm.addControl('persistentMenu', this.fb.control(null));
-    if (!this.feedbackForm.contains('sessionMinimization'))
-      this.feedbackForm.addControl(
-        'sessionMinimization',
-        this.fb.control(null)
-      );
+    if (this.feedbackForm.invalid) {
+      this.feedbackForm.markAllAsTouched();
+
+      Swal.fire({
+        icon: 'warning',
+        title: 'Incomplete Ratings',
+        text: 'Please complete all required rating questions before submitting.',
+        confirmButtonColor: '#3498db',
+      });
+
+      return;
+    }
+
     this.http
       .post('http://localhost:3000/api/feedback', this.feedbackForm.value)
       .subscribe({

@@ -13,10 +13,12 @@ import { ConsentComponent } from '../consent/consent.component';
   styleUrl: './chattbot.component.scss',
 })
 export class ChattbotComponent {
+  @Output() minimize = new EventEmitter<void>();
   @Output() close = new EventEmitter<void>();
   @Input() chatbotEndpoint: string = environment.rasaEndpoint;
   @Input() userId: string = '';
   showConsentDialog = true;
+  isMinimized: boolean = false;
   userMessage = '';
   isTyping = false;
   isChatOpen = true;
@@ -30,7 +32,11 @@ export class ChattbotComponent {
     isButtonGroup?: boolean;
     buttons?: { title: string; payload: string }[];
   }[] = [];
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.showChat = true;
+    this.isTyping = true;
+    this.sendToRasa('hi'); // Begin conversation after consent
+  }
   onConsentAccepted(): void {
     this.showConsentDialog = false;
     this.showChat = true;
@@ -112,5 +118,14 @@ export class ChattbotComponent {
   onFeedbackComplete(): void {
     this.isChatOpen = false; // now window can close after thank you
     this.close.emit();
+  }
+
+  minimizeChat(): void {
+    this.minimize.emit();
+    this.isMinimized = true;
+  }
+
+  restoreChat(): void {
+    this.isMinimized = false;
   }
 }
