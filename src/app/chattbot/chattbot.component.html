@@ -22,7 +22,7 @@
     </button>
   </div>
 
-  <div class="chat-body" *ngIf="showChat">
+  <div class="chat-body" *ngIf="showChat" #chatBody>
     <div class="chat-day">
       {{ currentDay | date : "fullDate" }}
     </div>

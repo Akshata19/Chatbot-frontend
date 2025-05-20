@@ -13,6 +13,8 @@
   z-index: 9999;
   overflow: hidden;
   font-family: Arial, sans-serif;
+  overflow-y: auto;
+  max-height: 400px;
 
   .chat-header {
     background: #007bff;
