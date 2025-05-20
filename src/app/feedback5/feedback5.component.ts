@@ -9,6 +9,7 @@ import {
   Validators,
 } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { environment } from '../../environment/environment';
 
 @Component({
   selector: 'app-feedback5',
@@ -55,7 +56,7 @@ export class Feedback5Component {
     }
 
     this.http
-      .post('http://localhost:3000/api/feedback', this.feedbackForm.value)
+      .post(`${environment.backendUrl}/api/feedback`, this.feedbackForm.value)
       .subscribe({
         next: (res: any) => {
           this.feedbackForm.reset({ chatbotVersion: this.chatbotVersion });
