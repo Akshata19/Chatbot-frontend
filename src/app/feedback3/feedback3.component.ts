@@ -9,6 +9,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { environment } from '../../environment/environment';
 
 @Component({
   selector: 'app-feedback3',
@@ -54,7 +55,7 @@ export class Feedback3Component {
     }
 
     this.http
-      .post('http://localhost:3000/api/feedback', this.feedbackForm.value)
+      .post(`${environment.backendUrl}/api/feedback`, this.feedbackForm.value)
       .subscribe({
         next: (res: any) => {
           this.feedbackForm.reset({ chatbotVersion: this.chatbotVersion });
