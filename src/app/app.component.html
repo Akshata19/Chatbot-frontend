@@ -15,7 +15,7 @@
   <!-- Floating Chatbot Icon -->
   <div
     class="chatbot-launcher"
-    (click)="isMinimized ? restoreChat() : toggleChatOptions()"
+    (click)="isMinimized ? restoreChat() : openChat(2)"
     *ngIf="!isAnyChatbotOpen() || isMinimized"
   >
     <i class="fas fa-comments"></i>
