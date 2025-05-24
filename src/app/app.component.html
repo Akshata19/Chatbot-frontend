@@ -12,7 +12,7 @@
 
   <div
     class="chatbot-launcher"
-    (click)="isMinimized ? restoreChat() : toggleChatOptions()"
+    (click)="isMinimized ? restoreChat() : openChat(5)"
     *ngIf="!isAnyChatbotOpen() || isMinimized"
   >
     <i class="fas fa-comments"></i>
