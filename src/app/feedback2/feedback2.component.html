@@ -150,6 +150,24 @@
         </ng-container>
       </div>
     </div>
+    <div class="rating-group">
+      <label>
+        How much did you like the Persistent menu icon? <br />
+        <small>1 = Didn't like at all, 5 = Liked very much</small>
+      </label>
+      <div class="stars">
+        <ng-container *ngFor="let rating of [5, 4, 3, 2, 1]">
+          <input
+            type="radio"
+            id="persistentMenu-{{ rating }}"
+            name="persistentMenu"
+            formControlName="persistentMenu"
+            [value]="rating"
+          />
+          <label for="persistentMenu-{{ rating }}">&#9733;</label>
+        </ng-container>
+      </div>
+    </div>
 
     <div class="rating-group">
       <label>
