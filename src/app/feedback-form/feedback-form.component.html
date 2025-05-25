@@ -48,8 +48,9 @@
   <form *ngIf="!submitted" [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
     <fieldset>
       <label for="name">
-        Please enter a unique identifier (e.g., first two letters of your first
-        name and your date of birth):
+        Please enter the unique identifier you provided at the beginning of the
+        survey (the first two letters of your mother's name in capital letters,
+        followed by the last two digits of your birth year):
       </label>
       <input
         id="name"
