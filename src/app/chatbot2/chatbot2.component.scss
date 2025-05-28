@@ -107,7 +107,8 @@
       font-size: 14px;
       display: flex;
       position: relative;
-      max-width: 80%;
+      max-width: 100%;
+      width: fit-content;
       border-radius: 15px 15px 15px 0;
     }
 
@@ -184,7 +185,7 @@
   .rich-menu {
     width: auto;
     margin-top: 10px;
-    margin-left: 30px;
+    margin-left: 15px;
   }
 
   .rich-menu-items {
@@ -433,7 +434,7 @@
 .bot-label {
   font-size: 11px;
   color: #777;
-  margin: 4px 0 8px 48px; // properly aligned under bot bubble
+  margin: 4px 0 8px 20px; // properly aligned under bot bubble
 }
 .confirmation-dialog {
   position: absolute;
