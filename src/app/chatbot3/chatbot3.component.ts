@@ -59,7 +59,7 @@ export class Chatbot3Component {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         sender: this.userId,
-        message: 'Hello from second bot',
+        message: 'hi',
       }),
     })
       .then((response) => response.json())
@@ -80,7 +80,7 @@ export class Chatbot3Component {
             if (index === 0) {
               this.messages.push({
                 sender: 'Bot',
-                text: `Hello ${this.username}, ${res.text}`,
+                text: res.text,
                 time: this.getCurrentTime(),
               });
             } else {
