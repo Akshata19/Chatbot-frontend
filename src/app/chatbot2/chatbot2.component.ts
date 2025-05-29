@@ -71,7 +71,7 @@ export class Chatbot2Component {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         sender: this.userId,
-        message: 'Hi',
+        message: 'hi',
       }),
     })
       .then((response) => response.json())
@@ -91,7 +91,7 @@ export class Chatbot2Component {
             if (index === 0) {
               this.messages.push({
                 sender: 'Bot',
-                text: `Hello ${this.username}, ${res.text}`,
+                text: res.text,
               });
             } else {
               this.messages.push({
