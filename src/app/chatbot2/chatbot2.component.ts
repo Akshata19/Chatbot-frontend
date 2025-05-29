@@ -71,7 +71,7 @@ export class Chatbot2Component {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         sender: this.userId,
-        message: 'Hello from second bot',
+        message: 'Hi',
       }),
     })
       .then((response) => response.json())
