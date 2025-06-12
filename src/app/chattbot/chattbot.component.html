@@ -23,9 +23,7 @@
   </div>
 
   <div class="chat-body" *ngIf="showChat" #chatBody>
-    <div class="chat-day">
-      {{ currentDay | date : "fullDate" }}
-    </div>
+    <div class="chat-day">Today</div>
     <div *ngFor="let message of messages">
       <div
         class="message-wrapper"
@@ -59,8 +57,11 @@
     </div>
 
     <!-- Typing indicator -->
-    <div *ngIf="isTyping" class="typing-indicator">
-      <span></span><span></span><span></span>
+
+    <div class="message-container bot-message" *ngIf="isTyping">
+      <div class="typing-indicator">
+        <span></span><span></span><span></span>
+      </div>
     </div>
   </div>
 
