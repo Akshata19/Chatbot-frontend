@@ -189,17 +189,6 @@
       }
     }
   }
-  .message-container.typing-bubble {
-    max-width: fit-content;
-    background-color: #f5f6f7;
-    padding: 6px 10px;
-    border-radius: 20px;
-    margin: 4px 0;
-    align-self: flex-start;
-    display: flex;
-    align-items: center;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  }
 
   .typing-indicator {
     display: flex;
@@ -211,7 +200,7 @@
       width: 8px;
       height: 8px;
       margin: 0 4px;
-      background-color: #939394;
+      background-color: #007bff;
       border-radius: 50%;
       animation: typing-animation 1.5s infinite;
     }

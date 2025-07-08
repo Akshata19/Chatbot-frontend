@@ -58,10 +58,8 @@
 
     <!-- Typing indicator -->
 
-    <div class="message-container typing-bubble" *ngIf="isTyping">
-      <div class="typing-indicator">
-        <span></span><span></span><span></span>
-      </div>
+    <div *ngIf="isTyping" class="typing-indicator">
+      <span></span><span></span><span></span>
     </div>
   </div>
 
